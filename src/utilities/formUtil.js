@@ -17,18 +17,27 @@ export const validateField = (field, validationType) => {
   return validResult;
 };
 
-export const login = (username, password) => {
+export const loginUser = (username, password) => {
   let result = false;
 
   if (username === 'bobcobb' && password === 'test123') {
-    Cookies.set('user_cookie', username);
     result = true;
   }
 
   return result;
 };
 
+export const setLoginCookie = (username) => {
+  console.log(username);
+  Cookies.set('user_cookie', username);
+  console.log(Cookies.get('user_cookie'));
+};
+
+export const removeLoginCookie = () => {
+  Cookies.remove('user_cookie');
+};
+
 export const getLoginCookie = () => {
-  let cookieValue = Cookies.get('user_cookie');
+  const cookieValue = Cookies.get('user_cookie');
   return cookieValue;
 };

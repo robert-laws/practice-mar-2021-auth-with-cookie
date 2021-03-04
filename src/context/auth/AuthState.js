@@ -1,12 +1,14 @@
 import React, { useReducer, useCallback } from 'react';
+import Cookies from 'js-cookie';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
-import { LOGIN, LOGOUT, LOGIN_ERROR } from '../types';
-import { getLoginCookie } from '../../utilities/formUtil';
+import { LOGIN_SUCCESS, LOGOUT, LOGIN_ERROR } from '../types';
+import { loginUser, getLoginCookie } from '../../utilities/formUtil';
 
 const AuthState = ({ children }) => {
   const initialState = {
-    user: null,
+    cookie: Cookies.get('user_cookie'),
+    isAuthenticated: null,
     isLoading: true,
     errorMessage: null,
   };
@@ -16,11 +18,10 @@ const AuthState = ({ children }) => {
   const login = useCallback(
     (username, password) => {
       try {
-        const login = getLoginCookie();
-        console.log(login);
+        const login = loginUser(username, password);
 
         if (login) {
-          dispatch({ type: LOGIN, payload: login });
+          dispatch({ type: LOGIN_SUCCESS, payload: username });
         } else {
           dispatch({ type: LOGIN_ERROR, payload: 'Login Error' });
         }
@@ -32,15 +33,20 @@ const AuthState = ({ children }) => {
   );
 
   const logout = useCallback(() => {
-    dispatch({ type: LOGOUT, payload: null });
+    dispatch({ type: LOGOUT });
   }, [dispatch]);
+
+  const checkAuthentication = () => {
+    const currentAuth = getLoginCookie();
+  };
 
   return (
     <AuthContext.Provider
       value={{
-        user: state.user,
+        isAuthenticated: state.isAuthenticated,
         isLoading: state.isLoading,
         errorMessage: state.errorMessage,
+        checkAuthentication,
         login,
         logout,
       }}

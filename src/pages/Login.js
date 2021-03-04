@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { validateField, loginResult } from '../utilities/formUtil';
+import React, { useState, useEffect, useContext } from 'react';
+import { validateField } from '../utilities/formUtil';
+import AuthContext from '../context/auth/authContext';
 
 export const Login = () => {
+  const authContext = useContext(AuthContext);
+  const { login } = authContext;
+
   const [loginForm, setLoginForm] = useState({ username: '', password: '' });
   const [validForm, setValidForm] = useState(false);
 
@@ -20,8 +24,7 @@ export const Login = () => {
     event.preventDefault();
 
     if (validForm) {
-    } else {
-      console.log('Form is Not Valid');
+      login(loginForm.username, loginForm.password);
     }
   };
 
