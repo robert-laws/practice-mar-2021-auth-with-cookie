@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { validateField } from '../utilities/formUtil';
 import AuthContext from '../context/auth/authContext';
 
-export const Login = () => {
+export const Login = ({ errorMessage }) => {
   const authContext = useContext(AuthContext);
   const { login } = authContext;
 
@@ -64,6 +64,11 @@ export const Login = () => {
         <div>
           <input type='submit' value='Submit' />
         </div>
+        {errorMessage && (
+          <div style={{ color: 'red' }}>
+            <h5>Error with login</h5>
+          </div>
+        )}
       </form>
     </div>
   );

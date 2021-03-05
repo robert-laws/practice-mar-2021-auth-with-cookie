@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 
+// validation
 export const validateField = (field, validationType) => {
   let validResult = false;
 
@@ -17,6 +18,7 @@ export const validateField = (field, validationType) => {
   return validResult;
 };
 
+// login and cookies
 export const loginUser = (username, password) => {
   let result = false;
 
@@ -27,17 +29,17 @@ export const loginUser = (username, password) => {
   return result;
 };
 
-export const setLoginCookie = (username) => {
+export const setMyCookie = (username) => {
   console.log(username);
   Cookies.set('user_cookie', username);
   console.log(Cookies.get('user_cookie'));
 };
 
-export const removeLoginCookie = () => {
-  Cookies.remove('user_cookie');
+export const removeMyCookie = () => {
+  Cookies.remove('user_cookie', { path: '' });
 };
 
-export const getLoginCookie = () => {
+export const getMyCookie = () => {
   const cookieValue = Cookies.get('user_cookie');
   return cookieValue;
 };

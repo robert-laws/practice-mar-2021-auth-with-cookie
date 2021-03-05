@@ -1,20 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.css';
 import { Home, Login, Logout } from './pages';
 import AuthContext from './context/auth/authContext';
 
 function App() {
   const authContext = useContext(AuthContext);
-  const { cookie, isAuthenticated } = authContext;
+  const { isAuthenticated, errorMessage, checkCookie } = authContext;
 
-  console.log(cookie);
+  useEffect(() => {
+    checkCookie();
+  }, [checkCookie]);
 
   return (
     <div className='App'>
       <h1>Practice Authentication App</h1>
       <hr />
+
       <Home />
-      {!isAuthenticated && <Login />}
+      {!isAuthenticated && <Login errorMessage={errorMessage} />}
       {isAuthenticated && <Logout />}
     </div>
   );

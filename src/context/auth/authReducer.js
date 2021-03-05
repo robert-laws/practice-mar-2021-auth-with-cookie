@@ -1,13 +1,13 @@
 import { LOGIN_SUCCESS, LOGOUT, LOGIN_ERROR } from '../types';
-import { setLoginCookie, removeLoginCookie } from '../../utilities/formUtil';
 
 const authReducer = (state, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS: {
-      setLoginCookie(action.payload);
       return {
         ...state,
+        cookie: action.payload,
         isAuthenticated: true,
+        isLoading: false,
         errorMessage: null,
       };
     }
@@ -21,9 +21,9 @@ const authReducer = (state, action) => {
     }
 
     case LOGOUT: {
-      removeLoginCookie();
       return {
         ...state,
+        cookie: null,
         isAuthenticated: false,
         errorMessage: null,
       };
