@@ -29,10 +29,9 @@ export const loginUser = (username, password) => {
   return result;
 };
 
-export const setMyCookie = (username) => {
-  console.log(username);
-  Cookies.set('user_cookie', username);
-  console.log(Cookies.get('user_cookie'));
+export const setMyCookie = (token) => {
+  Cookies.set('user_cookie', token);
+  //console.log(Cookies.get('user_cookie'));
 };
 
 export const removeMyCookie = () => {

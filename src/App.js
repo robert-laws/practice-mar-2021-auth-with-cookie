@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import './App.css';
 // import { Auth, Home, Login, Logout } from './pages';
-import { Auth, AuthLogout, Home } from './pages';
+import { Auth, AuthLogout, Home, GetPosts } from './pages';
 // import AuthContext from './context/auth/authContext';
 import AuthenticationContext from './context/authentication/authenticationContext';
 
@@ -11,7 +11,7 @@ function App() {
   // const { checkCookie } = authContext;
 
   const authenticationContext = useContext(AuthenticationContext);
-  const { isLoggedIn } = authenticationContext;
+  const { isAuthenticated } = authenticationContext;
 
   // useEffect(() => {
   //   checkCookie();
@@ -26,7 +26,14 @@ function App() {
       {/* {!isAuthenticated && <Login errorMessage={errorMessage} />}
       {isAuthenticated && <Logout />} */}
       <hr />
-      {!isLoggedIn ? <Auth /> : <AuthLogout />}
+      {!isAuthenticated ? (
+        <Auth />
+      ) : (
+        <>
+          <AuthLogout />
+          <GetPosts />
+        </>
+      )}
     </div>
   );
 }

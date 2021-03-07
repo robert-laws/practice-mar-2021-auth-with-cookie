@@ -24,6 +24,7 @@ export const Login = ({ errorMessage }) => {
     event.preventDefault();
 
     if (validForm) {
+      console.log(loginForm);
       login(loginForm.username, loginForm.password);
     }
   };

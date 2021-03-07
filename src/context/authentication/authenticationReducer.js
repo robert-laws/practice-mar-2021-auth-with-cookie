@@ -5,14 +5,16 @@ const authenticationReducer = (state, action) => {
     case AUTHENTICATION_LOGIN: {
       return {
         ...state,
-        isLoggedIn: true,
+        cookie: action.payload,
+        isAuthenticated: true,
       };
     }
 
     case AUTHENTICATION_LOGOUT: {
       return {
         ...state,
-        isLoggedIn: false,
+        cookie: null,
+        isAuthenticated: false,
       };
     }
 

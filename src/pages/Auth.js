@@ -6,7 +6,7 @@ export const Auth = () => {
   const { login } = authenticationContext;
 
   const [userInput, setUserInput] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -29,12 +29,12 @@ export const Auth = () => {
       <h2>Auth - Login Required</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          Email:{' '}
+          Username:{' '}
           <input
             type='text'
-            name='email'
-            id='email'
-            value={userInput.email}
+            name='username'
+            id='username'
+            value={userInput.username}
             onChange={handleChange}
           />
         </div>
