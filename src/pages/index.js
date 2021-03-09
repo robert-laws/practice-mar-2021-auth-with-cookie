@@ -7,3 +7,6 @@ export { AuthLogout } from './AuthLogout';
 export { GetPost } from './GetPost';
 export { GetPosts } from './GetPosts';
 export { UpdatePost } from './UpdatePost';
+
+// Courses
+export { GetCourses } from './GetCourses';

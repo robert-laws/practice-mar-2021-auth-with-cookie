@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import AuthenticationState from './context/authentication/AuthenticationState';
-import PostsState from './context/posts/PostsState';
+import CoursesState from './context/courses/CoursesState';
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthenticationState>
-      <PostsState>
+      <CoursesState>
         <App />
-      </PostsState>
+      </CoursesState>
     </AuthenticationState>
   </React.StrictMode>,
   document.getElementById('root')

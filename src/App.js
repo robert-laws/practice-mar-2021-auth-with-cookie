@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 // import { Auth, Home, Login, Logout } from './pages';
-import { Auth, AuthLogout, Home, GetPosts } from './pages';
+import { Auth, AuthLogout, Home, GetCourses } from './pages';
 // import AuthContext from './context/auth/authContext';
 import AuthenticationContext from './context/authentication/authenticationContext';
 
@@ -26,12 +26,14 @@ function App() {
       {/* {!isAuthenticated && <Login errorMessage={errorMessage} />}
       {isAuthenticated && <Logout />} */}
       <hr />
+      <GetCourses />
+      <hr />
       {!isAuthenticated ? (
         <Auth />
       ) : (
         <>
           <AuthLogout />
-          <GetPosts />
+          {/* <GetPosts /> */}
         </>
       )}
     </div>
