@@ -28,14 +28,15 @@ function App() {
       <hr />
       <GetCourses />
       <hr />
-      {!isAuthenticated ? (
+
+      {/* {!isAuthenticated ? (
         <Auth />
       ) : (
         <>
           <AuthLogout />
-          {/* <GetPosts /> */}
+          <GetPosts />
         </>
-      )}
+      )} */}
     </div>
   );
 }

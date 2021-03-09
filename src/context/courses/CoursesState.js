@@ -5,12 +5,7 @@ import coursesReducer from './coursesReducer';
 
 const CoursesState = ({ children }) => {
   const initialState = {
-    course: {
-      name: '',
-      faculty: '',
-      semester: '',
-      year: '',
-    },
+    course: null,
     courses: null,
     loadingCourses: true,
     coursesError: null,
@@ -27,7 +22,6 @@ const CoursesState = ({ children }) => {
     try {
       const response = await fetch(restURL);
       const allCourses = await response.json();
-      console.log(allCourses);
 
       if (allCourses) {
         dispatch({ type: GET_COURSES, payload: allCourses });
@@ -37,6 +31,17 @@ const CoursesState = ({ children }) => {
     }
   }, [dispatch]);
 
+  const getCourse = useCallback(
+    (course) => {
+      if (course === []) {
+        dispatch({ type: GET_COURSE, payload: false });
+      } else {
+        dispatch({ type: GET_COURSE, payload: course });
+      }
+    },
+    [dispatch]
+  );
+
   return (
     <CoursesContext.Provider
       value={{
@@ -45,6 +50,7 @@ const CoursesState = ({ children }) => {
         loadingCourses: state.loadingCourses,
         coursesError: state.coursesError,
         getCourses,
+        getCourse,
       }}
     >
       {children}
