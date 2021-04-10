@@ -1,4 +1,8 @@
-import { AUTHENTICATION_LOGIN, AUTHENTICATION_LOGOUT } from '../types';
+import {
+  AUTHENTICATION_LOGIN,
+  AUTHENTICATION_LOGOUT,
+  LOGIN_ERROR,
+} from '../types';
 
 const authenticationReducer = (state, action) => {
   switch (action.type) {
@@ -7,6 +11,8 @@ const authenticationReducer = (state, action) => {
         ...state,
         cookie: action.payload,
         isAuthenticated: true,
+        loading: false,
+        error: null,
       };
     }
 
@@ -15,6 +21,16 @@ const authenticationReducer = (state, action) => {
         ...state,
         cookie: null,
         isAuthenticated: false,
+        loading: false,
+        error: null,
+      };
+    }
+
+    case LOGIN_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     }
 

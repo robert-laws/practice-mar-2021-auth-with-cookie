@@ -1,5 +1,9 @@
 import React, { useReducer, useCallback } from 'react';
-import { AUTHENTICATION_LOGIN, AUTHENTICATION_LOGOUT } from '../types';
+import {
+  AUTHENTICATION_LOGIN,
+  AUTHENTICATION_LOGOUT,
+  LOGIN_ERROR,
+} from '../types';
 import AuthenticationContext from './authenticationContext';
 import authenticationReducer from './authenticationReducer';
 import {
@@ -40,12 +44,12 @@ const AuthenticationState = ({ children }) => {
         if (!response.ok) {
           // error
           const error = await response.json();
-          console.log(error.message);
-          // dispatch({ type: LOGIN_ERROR, payload: error.message });
+          dispatch({ type: LOGIN_ERROR, payload: error });
         } else {
           // success
           let user = await response.json();
           let token = await user.token;
+          console.log(token);
 
           if (token) {
             setMyCookie(token);
@@ -74,6 +78,8 @@ const AuthenticationState = ({ children }) => {
 
     if (myCookie) {
       dispatch({ type: AUTHENTICATION_LOGIN, payload: myCookie });
+    } else {
+      dispatch({ type: AUTHENTICATION_LOGOUT });
     }
   }, [dispatch]);
 

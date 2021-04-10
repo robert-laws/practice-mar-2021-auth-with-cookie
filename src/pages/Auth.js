@@ -3,7 +3,7 @@ import AuthenticationContext from '../context/authentication/authenticationConte
 
 export const Auth = () => {
   const authenticationContext = useContext(AuthenticationContext);
-  const { login } = authenticationContext;
+  const { login, loading, error } = authenticationContext;
 
   const [userInput, setUserInput] = useState({
     username: '',
@@ -25,31 +25,40 @@ export const Auth = () => {
   };
 
   return (
-    <div>
-      <h2>Auth - Login Required</h2>
-      <form onSubmit={handleSubmit}>
+    <>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
         <div>
-          Username:{' '}
-          <input
-            type='text'
-            name='username'
-            id='username'
-            value={userInput.username}
-            onChange={handleChange}
-          />
+          <div>
+            <h2>Auth - Login Required</h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                Username:{' '}
+                <input
+                  type='text'
+                  name='username'
+                  id='username'
+                  value={userInput.username}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                Password:{' '}
+                <input
+                  type='password'
+                  name='password'
+                  id='password'
+                  value={userInput.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <button>Login</button>
+            </form>
+          </div>
+          <div>{error && error.message}</div>
         </div>
-        <div>
-          Password:{' '}
-          <input
-            type='password'
-            name='password'
-            id='password'
-            value={userInput.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button>Login</button>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
